@@ -1,7 +1,12 @@
 // Here is deployed contract address
 // deployContract Address:   0x0a1DDD72C1D3208EC837E652e04075962011960a
-const smartContractAddress = '0x0a1DDD72C1D3208EC837E652e04075962011960a';
-// the abi key of smart contract
+// const smartContractAddress = '0x0a1DDD72C1D3208EC837E652e04075962011960a';
+
+
+
+
+const smartContractAddress = '0xcB31c712af527b2dF44f1F106923081d56C29e55';
+
 const AbiKey = [
 	{
 		"inputs": [
@@ -549,6 +554,5 @@ const AbiKey = [
 		"type": "function"
 	}
 ]
-
 
 export default AbiKey;

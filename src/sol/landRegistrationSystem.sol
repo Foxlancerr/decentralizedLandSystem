@@ -355,7 +355,7 @@ contract LandRegistrationSystem {
             Area: 500,
             City: "peshawar",
             State: "pakistan",
-            LandPrice: 10 wei,
+            LandPrice: 2 wei,
             LandVerifyStatus: false,
             PropertyPID: _address //address match to the seller address for property verifcation
         });

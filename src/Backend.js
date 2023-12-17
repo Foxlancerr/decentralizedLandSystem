@@ -4,18 +4,17 @@
 import React, { useEffect, useState } from "react";
 import App from "./App";
 import AbiKey from "./sol/AbiKey";
-import ethers from 'ethers';
-// import the abi key of the deploy smart contract
-console.log(ethers);
-console.log(App);
+const ethers = require("ethers");
+
+
 
 
 
 const Backend = () => {
-  const smartContractAddress = '0x0a1DDD72C1D3208EC837E652e04075962011960a';
-  
-  const DummySellerAddress = '0x583031D1113aD414F02576BD6afaBfb302140225';
-  const DummyBuyerAddress = '0xdD870fA1b7C4700F2BD7f44238821C26f7392148';
+  const smartContractAddress = '0xcB31c712af527b2dF44f1F106923081d56C29e55';
+
+  const DummySellerAddress = '0x783935b2d25A0fbEE1911fa8664b6eDae3551c26';
+  const DummyBuyerAddress = '0x4be9D513E0A6A3aAf4D3b321c2CFd1886b073613';
 
   // usestate hook is defined to store the address
   const [metaMaskAddress, setmetamaskAddress] = useState(
@@ -75,7 +74,19 @@ const Backend = () => {
   const registerNewBuyer = async () => {
     try {
       const newBuyer = await contract.registerBuyer(111, DummyBuyerAddress);
-      console.log('successfully', newBuyer);
+      // console.log('successfully', newBuyer);
+
+      // Wait for the transaction to be mined
+      const receipt = await newBuyer.wait();
+
+      console.log('Transaction mined. Receipt:', receipt);
+
+      // Access the transaction status
+      if (receipt.status === 1) {
+        console.log('Transaction successful!');
+      } else {
+        console.log('Transaction failed!');
+      }
     } catch (err) {
       console.log(err);
     }
@@ -87,7 +98,7 @@ const Backend = () => {
   */
   const viewBuyerRecord = async () => {
     try {
-      const getBuyer = await contract.buyer_mapped(DummySellerAddress);
+      const getBuyer = await contract.buyer_mapped(DummyBuyerAddress);
       console.log(getBuyer);
     } catch (err) {
       console.log(err);
@@ -121,8 +132,19 @@ const Backend = () => {
   */
   const registerNewSeller = async () => {
     try {
-      const newSeller = await contract.registerSeller(777, DummySellerAddress);
-      console.log('successfully', newSeller);
+      const newSeller = await contract.registerSeller(222, DummySellerAddress);
+      // console.log('successfully', newSeller);
+
+      const receipt = await newSeller.wait();
+
+      console.log('Transaction mined. Receipt:', receipt);
+
+      // Access the transaction status
+      if (receipt.status === 1) {
+        console.log('Transaction successful!');
+      } else {
+        console.log('Transaction failed!');
+      }
     } catch (err) {
       console.log(err);
     }
@@ -133,7 +155,7 @@ const Backend = () => {
   */
   const viewSellerRecord = async () => {
     try {
-      const getSeller = await contract.seller_mapped(DummyBuyerAddress);
+      const getSeller = await contract.seller_mapped(DummySellerAddress);
       console.log(getSeller);
     } catch (err) {
       console.log(err);
@@ -149,7 +171,7 @@ const Backend = () => {
       const sellerVerify = await contract.SellerIsVerified(DummySellerAddress);
       console.log('successfully', sellerVerify);
     } catch (err) {
-      console.log(err);
+      console.log(err.message);
     }
   };
 
@@ -167,10 +189,20 @@ const Backend = () => {
   */
   const registerNewLand = async () => {
     try {
-      const newLand = await contract.RegisterLand(777, DummySellerAddress)
-      console.log('successfully', newLand);
+      const newLand = await contract.RegisterLand(222, DummySellerAddress)
+      // console.log('successfully', newLand);
+      const receipt = await newLand.wait();
+
+      console.log('Transaction mined. Receipt:', receipt);
+
+      // Access the transaction status
+      if (receipt.status === 1) {
+        console.log('Transaction successful!');
+      } else {
+        console.log('Transaction failed!');
+      }
     } catch (err) {
-      console.log(err);
+      console.log(err.message);
     }
   };
   /*
@@ -179,10 +211,10 @@ const Backend = () => {
   */
   const viewLandRecord = async () => {
     try {
-      const getLand = await contract.landRegistry_mapped(777);
+      const getLand = await contract.landRegistry_mapped(222);
       console.log(getLand);
     } catch (err) {
-      console.log(err);
+      console.log(err.message);
     }
   }
 
@@ -194,9 +226,19 @@ const Backend = () => {
   const IsLandVerified = async () => {
     try {
       const landVerify = await contract.LandIsVerified(DummySellerAddress);
-      console.log('successfully', landVerify);
+      // console.log('successfully', landVerify);
+      const receipt = await landVerify.wait();
+
+      console.log('Transaction mined. Receipt:', receipt);
+
+      // Access the transaction status
+      if (receipt.status === 1) {
+        console.log('Transaction successful!');
+      } else {
+        console.log('Transaction failed!');
+      }
     } catch (err) {
-      console.log(err);
+      console.log(err.message);
     }
   };
 
@@ -206,8 +248,8 @@ const Backend = () => {
  */
   const getLandPrice = async () => {
     try {
-      const landPrice = await contract.GetLandPrice(111);
-      console.log('successfully', (landPrice[0]));
+      const landPrice = await contract.GetLandPrice(222);
+      console.log('successfully', (landPrice));
     } catch (err) {
       console.log(err);
     }
@@ -219,21 +261,33 @@ const Backend = () => {
   */
   const buyNewPlot = async () => {
     try {
-      const option = { value: ethers.parseEther("0.00000000000000001")}
+      const option = { value: ethers.parseEther("0.00000000000000005") }
       console.log(option.value);
       const newPlot = await contract.buyPlot(DummyBuyerAddress, DummySellerAddress, option)
-      console.log('successfully', newPlot);
+      // console.log('successfully', newPlot);
+      const receipt = await newPlot.wait();
+
+      console.log('Transaction mined. Receipt:', receipt);
+
+      // Access the transaction status
+      if (receipt.status === 1) {
+        console.log('Transaction successful!');
+      } else {
+        console.log('Transaction failed!');
+      }
     } catch (err) {
-      console.log(err);
+      console.log(err.message);
     }
   };
 
 
 
+
+
+
   return (
     <>
-    <App contract = {contract}></App>
-    <LandRegistration value = {10}></LandRegistration>
+      <App contract={contract}></App>
       <button onClick={viewSellerRecord} className="btn">view seller</button>
       <button onClick={registerNewSeller} className="btn">register Seller</button>
       <button onClick={IsSellerVerified} className="btn">isSellerVerified</button>

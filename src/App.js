@@ -1,11 +1,13 @@
 import LandRegistration from "./LandRegistration";
+
 import './app.css';
 
 function App(props){
     // console.log(props);
     return(
         <div>
-            <LandRegistration/>
+            
+            {/* <LandRegistration/> */}
         </div>
     )
 }
